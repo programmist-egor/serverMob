@@ -11,6 +11,7 @@ import FavoritesController from "../controllers/favorites-controller.js";
 import RatingController from "../controllers/rating-controller.js";
 import SettingPageController from "../controllers/setting-page-controller.js";
 import ChatSupportController from "../controllers/chat-support-controller.js";
+import NotificationsController from "../controllers/notifications-controller.js";
 
 
 const Router = RouterExp.Router
@@ -87,5 +88,8 @@ mainRoute.post('/chat/add', authMiddleware, ChatSupportController.newDialogue);
 mainRoute.post('/chat/delete/:userId', authMiddleware, ChatSupportController.deleteDialogue);
 //SETTING PAGE
 mainRoute.get('/setting_page/all', SettingPageController.getSettingPage);
+//Notifications
+mainRoute.post('/message', NotificationsController.sendMessage);
+mainRoute.post('/token', NotificationsController.saveToken);
 
 export default mainRoute;

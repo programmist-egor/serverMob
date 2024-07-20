@@ -51,6 +51,14 @@ const NumberExtranet = sequelizeExtranet.define('Number-Extranet', {
         type: DataTypes.JSON,
         allowNull: false,
     },
+    nutrition: {
+        type: DataTypes.JSON,
+        allowNull: false,
+    },
+    freeCancellation: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+    },
     isBookable: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
