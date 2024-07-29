@@ -4,8 +4,11 @@ class UserController {
     async registration(req, res, next) {
         try {
             const { newUser } = req.body;
-            console.log("newUser",newUser);
             const data = await UserService.registration(newUser);
+            //Проверка на ошибки
+            if (data.success === false) {
+                return res.json(data)
+            }
 
             res.cookie(`refreshToken`, data.refreshToken, {
                 maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -24,6 +27,10 @@ class UserController {
             console.log("password",password);
             const userData = await UserService.login(email, password);
             console.log("userData",userData);
+            //Проверка на ошибки
+            if (userData.success === false) {
+                return res.json(userData)
+            }
             res.cookie(`refreshToken`, userData.refreshToken, {
                 maxAge: 30 * 24 * 60 * 60 * 1000,
                 httpOnly: true

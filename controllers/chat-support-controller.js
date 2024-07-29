@@ -20,6 +20,18 @@ class ChatSupportController {
             next(error);
         }
     }
+    async viewMessage(req, res, next) {
+        const userId = req.params.userId;
+        try {
+            if (!userId) {
+                return new ApiError.BadRequest("Некорректные данные")
+            }
+            const data = await ChatSupportService.viewMessage(userId)
+            return res.json(data)
+        } catch (error) {
+            next(error);
+        }
+    }
     async saveMessage(req, res, next) {
         const userId = req.params.userId;
         const {msg} = req.body;

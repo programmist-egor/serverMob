@@ -26,6 +26,15 @@ class ChatSupportService {
             return { success: false, error: "Не удалось получить данные пользователя" };
         }
     }
+    async viewMessage(userId) {
+        try {
+            const user = await ChatSupportModel.update({ newMsgUser: 0 }, { where: {userId: userId} });
+            return { success: true, data: user };
+        } catch (error) {
+            console.error("Error in getAllRatingObject:", error);
+            return { success: false, error: "Failed to get ratings" };
+        }
+    }
     async saveMessage(userId, msg) {
         try {
             const res = await ChatSupportModel.findOne({ where: {  userId } });

@@ -16,6 +16,10 @@ const ChatSupportModel = sequelizeExtranet.define('Chat-Support-Yooking', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    type: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     messages: {
         type: DataTypes.JSON,
         allowNull: false,

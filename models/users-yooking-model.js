@@ -65,8 +65,8 @@ const UsersYooking = sequelizeExtranet.define('Users-Yooking', {
         type: DataTypes.STRING,
         allowNull: true,
     },
-    activationLink: {
-        type: DataTypes.STRING,
+    activationCodeEmail: {
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
     currency: {

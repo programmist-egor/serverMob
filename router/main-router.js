@@ -12,6 +12,8 @@ import RatingController from "../controllers/rating-controller.js";
 import SettingPageController from "../controllers/setting-page-controller.js";
 import ChatSupportController from "../controllers/chat-support-controller.js";
 import NotificationsController from "../controllers/notifications-controller.js";
+import ConfirmCodeEmailAndPhoneController from "../controllers/confirm-code-email-and-phone-controller.js";
+import RestorePasswordController from "../controllers/restore-password-controller.js";
 
 
 const Router = RouterExp.Router
@@ -23,7 +25,14 @@ mainRoute.get("/user/get_by_id/:userId", authMiddleware, UserYookingController.g
 mainRoute.put("/user/yooking/:userId", authMiddleware, UserYookingController.updateUserYooking)
 mainRoute.put("/user/yooking/code/:userId", authMiddleware, UserYookingController.generateCode)
 mainRoute.delete("/user/yooking/:userId", authMiddleware, UserYookingController.deleteUserYooking)
-
+//CONFIRM EMAIL AND PHONE
+mainRoute.put("/code/email/:userId",  ConfirmCodeEmailAndPhoneController.sendCodeForEmail)
+mainRoute.post("/code/email/confirm/:userId",  ConfirmCodeEmailAndPhoneController.confirmCodeForEmail)
+mainRoute.post("/code/email/restore",  ConfirmCodeEmailAndPhoneController.confirmRestorePasswordCodeForEmail)
+mainRoute.post("/code/email/codeRestore",  ConfirmCodeEmailAndPhoneController.sendCodeRestorePassword)
+mainRoute.put("/code/phone/:userId",  ConfirmCodeEmailAndPhoneController.sendCodeForPhone)
+//RESTORE PASSWORD
+mainRoute.post("/code/restorePassword",  RestorePasswordController.sendRestorePassword)
 //NUMBER
 mainRoute.get('/numbers/:hotelId', NumberController.getAllNumbers);
 mainRoute.post('/numbers/hotels', NumberController.getAllHotelIdNumbers);
@@ -84,6 +93,7 @@ mainRoute.post('/rating', authMiddleware, RatingController.createRatingObject);
 mainRoute.get('/chat/msg/:userId', authMiddleware,ChatSupportController.getMsgUser);
 mainRoute.get('/chat', authMiddleware,ChatSupportController.getAllUsers);
 mainRoute.put('/chat/:userId', authMiddleware, ChatSupportController.saveMessage);
+mainRoute.put('/chat/viewMsg/:userId', authMiddleware, ChatSupportController.viewMessage);
 mainRoute.post('/chat/add', authMiddleware, ChatSupportController.newDialogue);
 mainRoute.post('/chat/delete/:userId', authMiddleware, ChatSupportController.deleteDialogue);
 //SETTING PAGE
